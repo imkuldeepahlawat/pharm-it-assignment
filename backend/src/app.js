@@ -7,9 +7,14 @@ app.use(cors());
 app.use(express.json());
 // GET: /products - To retrieve a list of all products.
 app.get("/products", async (req, res) => {
-  console.log("fetching all products");
-  const response = await Product.find({});
-  res.status(200).send(response);
+    try {
+        
+        console.log("fetching all products");
+        const response = await Product.find({});
+        res.status(200).send(response);
+    } catch (error) {
+        res.status(400).send(error)
+    }
 });
 // GET: /products/{id} - To retrieve a specific product by its ID.
 app.get("/products/:productId", async (req, res) => {
@@ -42,6 +47,7 @@ app.put("/products/:productId", async (req, res) => {
     prod.qty = qty;
   }
   await prod.save();
+  res.send(prod);
 });
 // DELETE: /products/{id} - To delete a product.
 app.delete("/products/:productId",async (req, res) => {

@@ -4,18 +4,18 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useSnackbar } from "notistack";
-import axios from "axios";
-const Inventory = ( ) => {
+import { deleteAction, getAction, postAction, putAction } from "../axios/AxiosOpration";
+const Inventory = () => {
   const { enqueueSnackbar } = useSnackbar();
-  const [addProduct, updateAddProduct] = useState({
+  const [addProd, setAddProd] = useState(false);
+  const [renderControl, setRenderControl] = useState(false);
+  const [delProd, setDelProd] = useState(false);
+  const [delId, setDelId] = useState("");
+  const [addProduct, setAddProduct] = useState({
     name: "",
     qty: "",
   });
 
-  const [deleteProduct, updateDeleteProduct] = useState({
-    name: "",
-    qty: "",
-  });
   const [qtyUpdateForm, updateQtyUpdateForm] = useState({
     id: null, // Track the id of the item being edited
     vis: false, // Indicates whether the update form is visible
@@ -32,39 +32,55 @@ const Inventory = ( ) => {
     updateItemQty(upQty);
   };
 
-  const handleUpdateClick = () => {
+  const handleUpdateClick = async () => {
     if (isNaN(itemQty)) {
-      // Display an error message or take appropriate action
       enqueueSnackbar("Qty. Should be a Number", { variant: "warning" });
       return; // Don't proceed with the update
     }
-    const updatedData = dummyData.map((item) =>
-      item.id === qtyUpdateForm.id ? { ...item, qty: itemQty } : item
-    );
+    await putAction({ qty: itemQty }, `/products/${qtyUpdateForm.id}`);
     // Update the local data and reset the update form state
-    // dummyData = updatedData;
+    updateItemQty("");
     updateQtyUpdateForm({
       id: null,
       vis: false,
     });
+    setRenderControl(!renderControl);
   };
 
   const [dummyData, setDummyData] = useState([]);
-  useEffect(()=>{
-    const onLoad = async ()=>{
-       try {
-         console.log(`something happen`);
-         const response = await axios.get(`http://127.0.0.1:8082/products`)
-         console.log(response);
-         setDummyData(response.data);
-       } catch (error) {
-         console.log(error);
-       }
- 
-     }
-     onLoad();
- 
-   },[])
+  useEffect(() => {
+    const onLoad = async () => {
+      try {
+        console.log(`something happen`);
+        const response = await getAction(`/products`);
+        console.log(response);
+        setDummyData(response);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    onLoad();
+  }, [renderControl]);
+  const handleNewProductAdd = async (data) => {
+    if(data.name === ""){
+      enqueueSnackbar("Name is Required", { variant: "warning" });
+      return; 
+    }
+    if (isNaN(itemQty)) {
+      enqueueSnackbar("Qty. Should be a Number", { variant: "warning" });
+      return; // Don't proceed with the update
+    }
+    if(data.qty === ""){
+      enqueueSnackbar("Qty. is required", { variant: "warning" });
+      return; 
+    }
+    const res = await postAction(data,`/products`);
+    setRenderControl(!renderControl);
+  }
+  const handleDeleteProduct = async(data) =>{
+    const res = await deleteAction(data)
+    setRenderControl(!renderControl);
+  }
 
   return (
     <div className="w-full h-full bg-[#99f6e4]">
@@ -73,15 +89,102 @@ const Inventory = ( ) => {
       </h3>
       <ul className="text-left p-4">
         <li className="text-2xl font-semibold">
-          <button>
-            Add <AddCircleIcon />{" "}
-          </button>
+          {addProd ? (
+            <div className="w-[200px]">
+              <div className="flex flex-col gap-2 my-2">
+                <input
+                  type="text"
+                  className=" outline-none bg-transparent border-b-4 border-black "
+                  name="name"
+                  placeholder="Name"
+                  value={addProduct.name}
+                  required
+                  onChange={(e) => setAddProduct({...addProduct,name:e.target.value})}
+                />
+                <input
+                  type="text"
+                  required
+                  className=" outline-none bg-transparent border-b-4 border-black "
+                  name="qty"
+                  placeholder="QTY"
+                  value={addProduct.qty}
+                  onChange={(e) => setAddProduct({...addProduct,qty:e.target.value})}
+                />
+              </div>
+              <button
+                className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
+                onClick={() => {
+                  handleNewProductAdd(addProduct)
+                  setAddProd(!addProd);
+                }}
+              >
+                ok{" "}
+              </button>
+              <button
+                className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg mx-2 "
+                onClick={() => {
+                  setAddProd(!addProd);
+                }}
+              >
+                {" "}
+                Cancle
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                setAddProd(!addProd);
+              }}
+            >
+              Add <AddCircleIcon />{" "}
+            </button>
+          )}
         </li>
         <li className="text-2xl font-semibold">
-          <button>
-            Delete
-            <DeleteIcon />
-          </button>
+        {/* delete part */}
+        {delProd ? (
+            <div className="w-[200px]">
+              <div className="flex flex-col gap-2 my-2">
+                <input
+                  type="text"
+                  className=" outline-none bg-transparent border-b-4 border-black "
+                  name="name"
+                  placeholder="Product Id"
+                  value={delId}
+                  required
+                  onChange={(e) => setDelId(e.target.value)}
+                />
+                
+              </div>
+              <button
+                className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
+                onClick={() => {
+                  handleDeleteProduct(delId)
+                  
+                  setDelProd(!addProd);
+                }}
+              >
+                ok{" "}
+              </button>
+              <button
+                className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg mx-2 "
+                onClick={() => {
+                  setDelProd(!delProd)
+                }}
+              >
+                {" "}
+                Cancle
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => {
+                setDelProd(!delProd);
+              }}
+            >
+              Delete <DeleteIcon/>{" "}
+            </button>
+          )}
         </li>
       </ul>
       <table className="border  border-black w-full ">
@@ -97,7 +200,10 @@ const Inventory = ( ) => {
         {dummyData.map((item, inx) => {
           const _id = item._id;
           return (
-            <tr key={_id}  className="flex justify-between  border border-1  border-black ">
+            <tr
+              key={_id}
+              className="flex justify-between  border border-1  border-black "
+            >
               <td className="border  border-black w-[25%] text-2xl p-2">
                 {inx}
               </td>
@@ -107,7 +213,7 @@ const Inventory = ( ) => {
               <td className="border  border-black w-[25%] text-2xl p-2">
                 {item.name}
               </td>
-              {qtyUpdateForm.vis && qtyUpdateForm.id === item.id ? (
+              {qtyUpdateForm.vis && qtyUpdateForm.id === _id ? (
                 <td className="border border-black w-[25%] text-2xl p-2">
                   <input
                     type="text"
@@ -140,7 +246,7 @@ const Inventory = ( ) => {
                     className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
                     onClick={() => {
                       // console.log(item.qty)
-                      handleEditClick(item.id, item.qty);
+                      handleEditClick(_id, item.qty);
                     }}
                   >
                     edit

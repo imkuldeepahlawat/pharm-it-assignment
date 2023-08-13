@@ -7,7 +7,7 @@ The Inventory Management System
 
 ## Deployment
 
-Frontend Deploy on [Vercel](https://vercel.com/).
+- Frontend Deploy on [Vercel](https://vercel.com/).
 
 [Frontend Link](https://pharm-it-assignment.vercel.app/)
 
