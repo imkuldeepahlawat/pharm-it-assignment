@@ -5,7 +5,7 @@ import Inventory from "./components/Inventory";
 
 function App() {
   return (
-    <div className="w-full bg-[#99f6e4] h-full text-center p-[2rem]">
+    <div className="w-full bg-[#99f6e4] h-[100vh] text-center p-[2rem]">
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route  path="/manageInventory" element={<Inventory/>} />
