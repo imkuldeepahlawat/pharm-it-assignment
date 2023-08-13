@@ -1,15 +1,16 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import Home from "./components/Home";
+import Inventory from "./components/Inventory";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-    </>
+    <div className="w-full bg-[#99f6e4] h-full text-center p-[2rem]">
+      <Routes>
+        <Route exact path="/" element={<Home />} />
+        <Route  path="/manageInventory" element={<Inventory/>} />
+      </Routes>
+    </div>
   );
 }
 

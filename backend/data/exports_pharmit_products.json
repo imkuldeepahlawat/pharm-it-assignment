@@ -1,0 +1,30 @@
+{"_id":{"$oid":"60331f421f1d093ab5424475"},"name":"Toothpaste","qty":2}
+{"_id":{"$oid":"60331f421f1d093ab5424476"},"name":"Soap","qty":5}
+{"_id":{"$oid":"60331f421f1d093ab5424477"},"name":"Shampoo","qty":0}
+{"_id":{"$oid":"60331f421f1d093ab5424478"},"name":"Toilet Paper","qty":10}
+{"_id":{"$oid":"60331f421f1d093ab5424479"},"name":"Toothbrush","qty":9}
+{"_id":{"$oid":"60331f421f1d093ab542447a"},"name":"Bread","qty":100}
+{"_id":{"$oid":"60331f421f1d093ab542447b"},"name":"Milk","qty":7}
+{"_id":{"$oid":"60331f421f1d093ab542447c"},"name":"Coffee","qty":20}
+{"_id":{"$oid":"60331f421f1d093ab542447d"},"name":"Tea","qty":39}
+{"_id":{"$oid":"60331f421f1d093ab542447e"},"name":"Water","qty":21}
+{"_id":{"$oid":"60331f421f1d093ab542447f"},"name":"Toilet Cleaner","qty":29}
+{"_id":{"$oid":"60331f421f1d093ab5424480"},"name":"Salt","qty":20}
+{"_id":{"$oid":"60331f421f1d093ab5424481"},"name":"Sugar","qty":50}
+{"_id":{"$oid":"60331f421f1d093ab5424482"},"name":"Cooking Oil","qty":29}
+{"_id":{"$oid":"60331f421f1d093ab5424483"},"name":"Bath Towel","qty":39}
+{"_id":{"$oid":"60331f421f1d093ab5424484"},"name":"Underwear","qty":93}
+{"_id":{"$oid":"60331f421f1d093ab5424485"},"name":"T-Shirt","qty":29}
+{"_id":{"$oid":"60331f421f1d093ab5424486"},"name":"Shoes","qty":93}
+{"_id":{"$oid":"60331f421f1d093ab5424487"},"name":"Wallet","qty":20}
+{"_id":{"$oid":"60331f421f1d093ab5424488"},"name":"Keys","qty":19}
+{"_id":{"$oid":"60331f421f1d093ab5424489"},"name":"Mobile Phone","qty":83}
+{"_id":{"$oid":"60331f421f1d093ab542448a"},"name":"Pen","qty":10}
+{"_id":{"$oid":"60331f421f1d093ab542448b"},"name":"Notebook","qty":10}
+{"_id":{"$oid":"60331f421f1d093ab542448c"},"name":"Glasses","qty":91}
+{"_id":{"$oid":"60331f421f1d093ab542448d"},"name":"Medicine","qty":82}
+{"_id":{"$oid":"60331f421f1d093ab542448e"},"name":"Tooth Floss","qty":10}
+{"_id":{"$oid":"60331f421f1d093ab542448f"},"name":"Hand Sanitizer","qty":72}
+{"_id":{"$oid":"60331f421f1d093ab5424490"},"name":"Face Mask","qty":81}
+{"_id":{"$oid":"60331f421f1d093ab5424491"},"name":"Keys","qty":71}
+{"_id":{"$oid":"60331f421f1d093ab5424492"},"name":"Sunglasses","qty":99}

@@ -1,0 +1,2 @@
+# mongo xflix --eval "db.dropDatabase()"
+mongoimport --uri "mongodb://ac-wwbzlvv-shard-00-00.0tgpfgj.mongodb.net:27017,ac-wwbzlvv-shard-00-01.0tgpfgj.mongodb.net:27017,ac-wwbzlvv-shard-00-02.0tgpfgj.mongodb.net:27017/videos?replicaSet=atlas-126d2s-shard-0" --ssl --authenticationDatabase admin --username imkuldeepahlawat --password xkY0h2ddHR3NnbTo --drop --collection videos --file data/export_xflix_videos.json
