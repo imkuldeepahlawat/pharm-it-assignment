@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
-import dummyData from "./data";
 import { useSnackbar } from "notistack";
-const Inventory = () => {
+import axios from "axios";
+const Inventory = ( ) => {
   const { enqueueSnackbar } = useSnackbar();
   const [addProduct, updateAddProduct] = useState({
     name: "",
     qty: "",
   });
+
   const [deleteProduct, updateDeleteProduct] = useState({
     name: "",
     qty: "",
@@ -47,6 +48,24 @@ const Inventory = () => {
       vis: false,
     });
   };
+
+  const [dummyData, setDummyData] = useState([]);
+  useEffect(()=>{
+    const onLoad = async ()=>{
+       try {
+         console.log(`something happen`);
+         const response = await axios.get(`http://127.0.0.1:8082/products`)
+         console.log(response);
+         setDummyData(response.data);
+       } catch (error) {
+         console.log(error);
+       }
+ 
+     }
+     onLoad();
+ 
+   },[])
+
   return (
     <div className="w-full h-full bg-[#99f6e4]">
       <h3 className="uppercase text-4xl font-sans font-semibold">
@@ -76,9 +95,9 @@ const Inventory = () => {
         </tr>
 
         {dummyData.map((item, inx) => {
-          const _id = item.id;
+          const _id = item._id;
           return (
-            <tr className="flex justify-between  border border-1  border-black ">
+            <tr key={_id}  className="flex justify-between  border border-1  border-black ">
               <td className="border  border-black w-[25%] text-2xl p-2">
                 {inx}
               </td>
