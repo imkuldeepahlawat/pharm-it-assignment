@@ -41,7 +41,7 @@ const Inventory = () => {
       item.id === qtyUpdateForm.id ? { ...item, qty: itemQty } : item
     );
     // Update the local data and reset the update form state
-    dummyData = updatedData;
+    // dummyData = updatedData;
     updateQtyUpdateForm({
       id: null,
       vis: false,
