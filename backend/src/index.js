@@ -1,12 +1,15 @@
 const mongoose = require("mongoose");
 const app = require("./app")
+require('dotenv').config();
+const mongodbUrl = process.env.MONGODB_URL
+const port = process.env.PORT 
 let server;
 
 
-mongoose.connect("mongodb+srv://imkuldeepahlawat:IJOWjfDHiDEtxDEP@pharmit.3daj5up.mongodb.net/pharmit?retryWrites=true&w=majority").then(()=>{
+mongoose.connect(mongodbUrl).then(()=>{
     console.log("mongodb is connected");
-    server = app.listen(8082,()=>{
-        console.log("mongodb is listening on",8082);
+    server = app.listen(port,()=>{
+        console.log("mongodb is listening on",port);
     })
     
 })

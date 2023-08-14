@@ -59,7 +59,7 @@ const Inventory = () => {
       try {
         console.log(`render happen`);
         const response = await getAction(`/products`);
-        
+
         setDummyData(response);
       } catch (error) {
         console.log(error);
@@ -74,7 +74,7 @@ const Inventory = () => {
       setRenderControl(true);
       return;
     }
-    console.log(data.qty)
+    console.log(data.qty);
     if (isNaN(data.qty)) {
       enqueueSnackbar("Qty. Should be a Number", { variant: "warning" });
       return 0; // Don't proceed with the update
@@ -84,6 +84,10 @@ const Inventory = () => {
       return;
     }
     const res = await postAction(data, `/products`);
+    setAddProduct({
+      name: "",
+      qty: "",
+    });
     setAddProd(!addProd);
     setRenderControl(!renderControl);
   };
@@ -131,7 +135,6 @@ const Inventory = () => {
                 className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
                 onClick={() => {
                   handleNewProductAdd(addProduct);
-                  
                 }}
               >
                 ok{" "}
@@ -170,17 +173,17 @@ const Inventory = () => {
                   required
                   onChange={(e) => {
                     console.log(e.target.value);
-                    setDelId(e.target.value)
-                    }}
+                    setDelId(e.target.value);
+                  }}
                 />
               </div>
               <button
                 className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
                 onClick={() => {
-                  console.log(delId)
+                  console.log(delId);
                   handleDeleteProduct(delId);
-                  setDelProd(false)
-                  setDelId("")
+                  setDelProd(false);
+                  setDelId("");
                   setDelProd(!addProd);
                 }}
               >
