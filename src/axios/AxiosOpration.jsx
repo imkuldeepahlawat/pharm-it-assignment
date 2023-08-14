@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useSnackbar } from "notistack";
-// https://pharmit.onrender.com
-const url = `http://127.0.0.1:8082`;
+// 
+
+const url = `https://pharmit.onrender.com`;
+// const url = `http://127.0.0.1:8082`;
 // get all list
 export const getAction = async (endpoint) => {
   try {

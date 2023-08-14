@@ -69,19 +69,22 @@ const Inventory = () => {
   }, [renderControl]);
 
   const handleNewProductAdd = async (data) => {
-    if (data.name === "") {
+    if (data.name == "") {
       enqueueSnackbar("Name is Required", { variant: "warning" });
+      setRenderControl(true);
       return;
     }
-    if (isNaN(itemQty)) {
+    console.log(data.qty)
+    if (isNaN(data.qty)) {
       enqueueSnackbar("Qty. Should be a Number", { variant: "warning" });
-      return; // Don't proceed with the update
+      return 0; // Don't proceed with the update
     }
     if (data.qty === "") {
       enqueueSnackbar("Qty. is required", { variant: "warning" });
       return;
     }
     const res = await postAction(data, `/products`);
+    setAddProd(!addProd);
     setRenderControl(!renderControl);
   };
   const handleDeleteProduct = async (data) => {
@@ -128,7 +131,7 @@ const Inventory = () => {
                 className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
                 onClick={() => {
                   handleNewProductAdd(addProduct);
-                  setAddProd(!addProd);
+                  
                 }}
               >
                 ok{" "}
