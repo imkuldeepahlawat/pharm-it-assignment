@@ -8,7 +8,7 @@ import axios from "axios";
 function App() {
   
   return (
-    <div className="w-fulltext-center p-[2rem]">
+    <div className="w-[100%] h-[100%] text-center p-[2rem]">
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route  path="/manageInventory" element={<Inventory  />} />

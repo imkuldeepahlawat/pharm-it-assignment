@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   
   return (
-    <div>
+    <div className="w-full h-screen" >
       <h1 className="uppercase text-5xl">pharamit</h1>
       <h2 className="text-2xl font-lightbold">Inventory Management System</h2>
       <p>

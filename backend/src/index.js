@@ -3,7 +3,7 @@ const app = require("./app")
 let server;
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/pharmit").then(()=>{
+mongoose.connect("mongodb+srv://imkuldeepahlawat:IJOWjfDHiDEtxDEP@pharmit.3daj5up.mongodb.net/pharmit?retryWrites=true&w=majority").then(()=>{
     console.log("mongodb is connected");
     server = app.listen(8082,()=>{
         console.log("mongodb is listening on",8082);

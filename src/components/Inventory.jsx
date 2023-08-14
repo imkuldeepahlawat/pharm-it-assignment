@@ -4,7 +4,13 @@ import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import RemoveIcon from "@mui/icons-material/Remove";
 import { useSnackbar } from "notistack";
-import { deleteAction, getAction, postAction, putAction } from "../axios/AxiosOpration";
+import {
+  deleteAction,
+  getAction,
+  postAction,
+  putAction,
+} from "../axios/AxiosOpration";
+import { Link } from "react-router-dom";
 const Inventory = () => {
   const { enqueueSnackbar } = useSnackbar();
   const [addProd, setAddProd] = useState(false);
@@ -62,31 +68,33 @@ const Inventory = () => {
     onLoad();
   }, [renderControl]);
   const handleNewProductAdd = async (data) => {
-    if(data.name === ""){
+    if (data.name === "") {
       enqueueSnackbar("Name is Required", { variant: "warning" });
-      return; 
+      return;
     }
     if (isNaN(itemQty)) {
       enqueueSnackbar("Qty. Should be a Number", { variant: "warning" });
       return; // Don't proceed with the update
     }
-    if(data.qty === ""){
+    if (data.qty === "") {
       enqueueSnackbar("Qty. is required", { variant: "warning" });
-      return; 
+      return;
     }
-    const res = await postAction(data,`/products`);
+    const res = await postAction(data, `/products`);
     setRenderControl(!renderControl);
-  }
-  const handleDeleteProduct = async(data) =>{
-    const res = await deleteAction(data)
+  };
+  const handleDeleteProduct = async (data) => {
+    const res = await deleteAction(data);
     setRenderControl(!renderControl);
-  }
+  };
 
   return (
-    <div className="w-full h-full bg-[#99f6e4]">
-      <h3 className="uppercase text-4xl font-sans font-semibold">
-        Welcome Admin
-      </h3>
+    <div className="">
+      <Link to="/">
+        <h3 className="uppercase text-4xl font-sans font-semibold">
+          Welcome Admin
+        </h3>
+      </Link>
       <ul className="text-left p-4">
         <li className="text-2xl font-semibold">
           {addProd ? (
@@ -99,7 +107,9 @@ const Inventory = () => {
                   placeholder="Name"
                   value={addProduct.name}
                   required
-                  onChange={(e) => setAddProduct({...addProduct,name:e.target.value})}
+                  onChange={(e) =>
+                    setAddProduct({ ...addProduct, name: e.target.value })
+                  }
                 />
                 <input
                   type="text"
@@ -108,13 +118,15 @@ const Inventory = () => {
                   name="qty"
                   placeholder="QTY"
                   value={addProduct.qty}
-                  onChange={(e) => setAddProduct({...addProduct,qty:e.target.value})}
+                  onChange={(e) =>
+                    setAddProduct({ ...addProduct, qty: e.target.value })
+                  }
                 />
               </div>
               <button
                 className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
                 onClick={() => {
-                  handleNewProductAdd(addProduct)
+                  handleNewProductAdd(addProduct);
                   setAddProd(!addProd);
                 }}
               >
@@ -141,8 +153,8 @@ const Inventory = () => {
           )}
         </li>
         <li className="text-2xl font-semibold">
-        {/* delete part */}
-        {delProd ? (
+          {/* delete part */}
+          {delProd ? (
             <div className="w-[200px]">
               <div className="flex flex-col gap-2 my-2">
                 <input
@@ -154,13 +166,12 @@ const Inventory = () => {
                   required
                   onChange={(e) => setDelId(e.target.value)}
                 />
-                
               </div>
               <button
                 className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
                 onClick={() => {
-                  handleDeleteProduct(delId)
-                  
+                  handleDeleteProduct(delId);
+
                   setDelProd(!addProd);
                 }}
               >
@@ -169,7 +180,7 @@ const Inventory = () => {
               <button
                 className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg mx-2 "
                 onClick={() => {
-                  setDelProd(!delProd)
+                  setDelProd(!delProd);
                 }}
               >
                 {" "}
@@ -182,7 +193,7 @@ const Inventory = () => {
                 setDelProd(!delProd);
               }}
             >
-              Delete <DeleteIcon/>{" "}
+              Delete <DeleteIcon />{" "}
             </button>
           )}
         </li>
