@@ -2,6 +2,7 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 // https://pharmit.onrender.com
 const url = `http://127.0.0.1:8082`;
+// get all list
 export const getAction = async (endpoint) => {
   try {
     const response = await axios.get(`${url}${endpoint}`);
@@ -13,6 +14,7 @@ export const getAction = async (endpoint) => {
     return null;
   }
 };
+// add new product
 export const postAction = async (data, endpoint) => {
   try {
     const response = await axios.post(`${url}${endpoint}`, data);
@@ -26,6 +28,7 @@ export const postAction = async (data, endpoint) => {
     return null;
   }
 };
+// data changing
 export const putAction = async (data, endpoint) => {
   try {
     const response = await axios.put(`${url}${endpoint}`, data);
@@ -36,14 +39,11 @@ export const putAction = async (data, endpoint) => {
     return null;
   }
 };
-export const deleteAction = async (data) => {
+// data delete
+export const deleteAction = async (id) => {
   try {
-    console.log(data);
-    const response = await axios.delete(`${url}/products/${data}`);
-    console.log(response);
-    return response.data;
+    await axios.delete(`${url}/products/${id}`);
   } catch (error) {
     console.log(error);
-    return null;
   }
 };

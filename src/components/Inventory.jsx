@@ -57,9 +57,9 @@ const Inventory = () => {
   useEffect(() => {
     const onLoad = async () => {
       try {
-        console.log(`something happen`);
+        console.log(`render happen`);
         const response = await getAction(`/products`);
-        console.log(response);
+        
         setDummyData(response);
       } catch (error) {
         console.log(error);
@@ -67,6 +67,7 @@ const Inventory = () => {
     };
     onLoad();
   }, [renderControl]);
+
   const handleNewProductAdd = async (data) => {
     if (data.name === "") {
       enqueueSnackbar("Name is Required", { variant: "warning" });
@@ -84,7 +85,7 @@ const Inventory = () => {
     setRenderControl(!renderControl);
   };
   const handleDeleteProduct = async (data) => {
-    const res = await deleteAction(data);
+    await deleteAction(data);
     setRenderControl(!renderControl);
   };
 
@@ -164,14 +165,19 @@ const Inventory = () => {
                   placeholder="Product Id"
                   value={delId}
                   required
-                  onChange={(e) => setDelId(e.target.value)}
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    setDelId(e.target.value)
+                    }}
                 />
               </div>
               <button
                 className="px-[5px] uppercase font-mono bg-slate-400 rounded-lg"
                 onClick={() => {
+                  console.log(delId)
                   handleDeleteProduct(delId);
-
+                  setDelProd(false)
+                  setDelId("")
                   setDelProd(!addProd);
                 }}
               >
