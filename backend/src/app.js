@@ -17,6 +17,7 @@ app.get("/products", async (req, res) => {
 });
 // GET: /products/{id} - To retrieve a specific product by its ID.
 app.get("/products/:productId", async (req, res) => {
+  console.log("fetching one product");
   try {
     const response = await Product.findById(req.params.productId);
     res.status(200).send(response);
@@ -26,6 +27,7 @@ app.get("/products/:productId", async (req, res) => {
 });
 // POST: /products - To add a new product.
 app.post("/products", async (req, res) => {
+  console.log("new product added");
   const data = req.body;
   try {
     const response = await Product.create(data);
@@ -36,6 +38,7 @@ app.post("/products", async (req, res) => {
 });
 // PUT: /products/{id} - To update the details of an existing product.
 app.put("/products/:productId", async (req, res) => {
+  console.log("change happen");
   const id = req.params.productId;
   const { name, qty } = req.body;
 
@@ -51,7 +54,7 @@ app.put("/products/:productId", async (req, res) => {
 // DELETE: /products/{id} - To delete a product.
 app.delete("/products/:productId", async (req, res) => {
   const productId = req.params.productId;
-  console.log("from delete");
+  console.log(" delete Product");
   try {
     const deletedProduct = await Product.findByIdAndDelete(productId);
     
