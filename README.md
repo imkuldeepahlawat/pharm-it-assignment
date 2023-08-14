@@ -13,7 +13,7 @@ The Inventory Management System
 
 Backend Deploy on [Render](https://render.com/).
 
-- [Backend Link](https://babeljs.io/)
+- [Backend Link](https://pharmit.onrender.com/)
 
 
 ## Screenshots
